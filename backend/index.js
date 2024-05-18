@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const UserModel = require("./Models/users")
-require('dotenv').config()
+// require('dotenv').config()
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(cors(
 app.use(express.json());  
 
 // connect to the database
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect("mongodb+srv://bedar:bedar@curd-app-cluster.rrqsybe.mongodb.net/?retryWrites=true&w=majority&appName=curd-app-cluster");
 
 // ************API's***********
 // creating new record
@@ -57,7 +57,7 @@ app.delete("/delete/:id", (req, res)=>{
 })
 
 // run server
-const PORT = process.env.PORT;
+const PORT = 3000;
 app.listen(PORT, ()=>{
     console.log(`Server is running on localhost:${PORT}`);
 })

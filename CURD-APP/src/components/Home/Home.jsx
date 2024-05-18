@@ -12,9 +12,10 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   const [popUp, setPopUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userIdToDelete, setUserIdToDelete] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     axios
       .get(`${baseURL}`)
       .then((result) => {
@@ -24,25 +25,29 @@ const Home = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleDelete = (id) => {
-    setIsLoading(true);
-    axios
-      .delete(`${baseURL}/delete/${id}`)
-      .then((result) => {
-        console.log(result);
-        setIsLoading(false)
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
-  };
-  const activePopUp = () => {
-    !setPopUp(); 
+  const activePopUp = (id) => {
+    setUserIdToDelete(id);
+    setPopUp(true);
     if (!popUp) {
       document.querySelector(".wrapper").classList.add("active");
     }
   };
+
+  const handleDelete = () => {
+    setIsLoading(true);
+    axios
+      .delete(`${baseURL}/delete/${userIdToDelete}`)
+      .then((result) => {
+        console.log(result);
+        setIsLoading(false);
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
+
   const removePopUp = () => {
     document.querySelector(".wrapper").classList.remove("active");
+    setPopUp(false);
   };
 
   return (
@@ -59,9 +64,9 @@ const Home = () => {
             <th>Action</th>
           </thead>
           <br />
-          <tbody className={isLoading? "animate": "remove-anim"}>
+          <tbody>
             {isLoading ? (
-              <tr style={{display: "flex", padding:"25px 0"}}>
+              <tr style={{ display: "flex", padding: "25px 0" }}>
                 <td
                   style={{
                     position: "absolute",
@@ -71,7 +76,7 @@ const Home = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <Animation height="30px" width="30px"/>
+                  <Animation height="30px" width="30px" />
                 </td>
               </tr>
             ) : (
@@ -87,15 +92,25 @@ const Home = () => {
                     >
                       <RxUpdate />
                     </Link>
-                    <button id="danger" title="Delete" onClick={activePopUp} >
+                    <button
+                      id="danger"
+                      title="Delete"
+                      onClick={() => activePopUp(user._id)}
+                    >
                       <MdDelete />
                     </button>
                     <div className="wrapper">
                       <div className="open-danger-area">
                         <p>Want to delete your data completely?</p>
                         <div className="btns">
-                          <button onClick={() => handleDelete(user._id)}>
-                            {isLoading? <><Animation/> Deleting...</>:'Yes, Delete'}
+                          <button onClick={handleDelete}>
+                            {isLoading ? (
+                              <>
+                                <Animation /> Deleting...
+                              </>
+                            ) : (
+                              "Yes, Delete"
+                            )}
                           </button>
                           <button onClick={removePopUp}>Cancel</button>
                         </div>

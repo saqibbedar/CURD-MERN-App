@@ -1,0 +1,12 @@
+.box{
+    border-radius: 50%;
+    animation: var(--rotate);
+    position: relative; 
+    width: 20px;
+    height: 20px;
+    border-top: solid white;
+    border-left: solid rgba(0, 0, 0, 0.396);
+    border-bottom: solid rgba(0, 0, 0, 0.396);
+    border-right: solid white;
+    transition: all .3s ease-in-out;
+}

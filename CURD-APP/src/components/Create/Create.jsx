@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { baseURL } from "../../../url";
+import Animation from "../Animation/Animation";
 
 const Create = () => {
   const [name, setName] = useState();
@@ -46,7 +47,7 @@ const Create = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button type="submit">{add? "Adding User...":"Add"}</button>
+        <button type="submit" >{add ? <><Animation/> Adding User </>: "Add"}</button>
         <button style={{ background: "lightgrey" }}>
           <Link
             to={"/"}

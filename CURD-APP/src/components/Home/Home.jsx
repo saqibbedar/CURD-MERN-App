@@ -5,6 +5,7 @@ import { RxUpdate } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../../../url";
+import Animation from "../Animation/Animation";
 
 const Home = () => {
   axios.defaults.withCredentials = true;
@@ -24,10 +25,12 @@ const Home = () => {
   }, []);
 
   const handleDelete = (id) => {
+    setIsLoading(true);
     axios
       .delete(`${baseURL}/delete/${id}`)
       .then((result) => {
         console.log(result);
+        setIsLoading(false)
         window.location.reload();
       })
       .catch((err) => console.log(err));
@@ -56,19 +59,19 @@ const Home = () => {
             <th>Action</th>
           </thead>
           <br />
-          <tbody>
-            {users.length === 0 ? (
-              <tr>
+          <tbody className={isLoading? "animate": "remove-anim"}>
+            {isLoading ? (
+              <tr style={{display: "flex", padding:"25px 0"}}>
                 <td
                   style={{
                     position: "absolute",
-                    width: "100%",
-                    textAlign: "center",
-                    fontWeight: "600",
                     left: "0",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
                   }}
                 >
-                  No Data found
+                  <Animation height="30px" width="30px"/>
                 </td>
               </tr>
             ) : (

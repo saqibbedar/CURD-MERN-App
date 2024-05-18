@@ -46,7 +46,7 @@ const Create = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button type="submit">{add? "Adding...":"Add"}</button>
+        <button type="submit">{add? "Adding User...":"Add"}</button>
         <button style={{ background: "lightgrey" }}>
           <Link
             to={"/"}

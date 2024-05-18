@@ -30,9 +30,9 @@ const Update = () => {
     .then(result => {
       console.log(result);
       setIsUpdating(true);
+      navigate("/");
     })
     .then(err => console.log(err))
-    navigate("/");
   }
 
   return (
@@ -51,7 +51,7 @@ const Update = () => {
           onChange={e => setEmail(e.target.value)}
           />
         </div>
-        <button type="submit">{isUpdating ? 'Updating...':'Update'}</button>
+        <button type="submit">{isUpdating ? 'Updating User...':'Update'}</button>
         <button style={{background:"lightgrey"}}><Link to={"/"} style={{color:"black"}}>Go Back</Link></button>
       </form>
     </div>

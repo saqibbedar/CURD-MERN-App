@@ -9,6 +9,7 @@ const Create = () => {
   const [email, setEmail] = useState();
   const navigate = useNavigate();
   const [add, setAdd] = useState(false);
+  axios.defaults.withCredentials = true;
 
   const handleSubmit = (e) => {
     setAdd(true);

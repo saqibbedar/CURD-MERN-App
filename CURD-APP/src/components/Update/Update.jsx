@@ -11,6 +11,7 @@ const Update = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [isUpdating, setIsUpdating] = useState(false);
+  axios.defaults.withCredentials = true;
 
   useEffect(()=>{
     axios.get(`${baseURL}/getUser/${id}`)

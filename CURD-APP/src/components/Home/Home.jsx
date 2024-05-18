@@ -7,6 +7,7 @@ import axios from "axios";
 import { baseURL } from "../../../url";
 
 const Home = () => {
+  axios.defaults.withCredentials = true;
   const [users, setUsers] = useState([]);
   const [popUp, setPopUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

@@ -2,14 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const UserModel = require("./Models/users")
-// require('dotenv').config()
+require('dotenv').config()
 
 const app = express();
 
 app.use(cors(
     {
         origin: ["https://deploy-mern-frontend.vercel.app"],
-        methods: ["POST", "GET"],
+        methods: ["POST", "GET", "PUT", "DELETE"],
         credentials: true
     }
 ));
@@ -17,7 +17,7 @@ app.use(cors(
 app.use(express.json());  
 
 // connect to the database
-mongoose.connect("mongodb+srv://bedar:bedar@curd-app-cluster.rrqsybe.mongodb.net/?retryWrites=true&w=majority&appName=curd-app-cluster");
+mongoose.connect(process.env.MONGO_URL);
 
 // ************API's***********
 // creating new record
@@ -57,7 +57,7 @@ app.delete("/delete/:id", (req, res)=>{
 })
 
 // run server
-const PORT = 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, ()=>{
     console.log(`Server is running on localhost:${PORT}`);
 })

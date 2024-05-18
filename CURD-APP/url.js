@@ -1,1 +1,1 @@
-export const baseURL = "http://localhost:3000"
+export const baseURL = "https://curd-mern-app-eta.vercel.app"

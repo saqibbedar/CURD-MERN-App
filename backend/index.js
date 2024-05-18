@@ -6,13 +6,13 @@ require('dotenv').config()
 
 const app = express();
 
-app.use(cors(
-    {
-        origin: ["https://deploy-mern-frontend.vercel.app"],
-        methods: ["POST", "GET", "PUT", "DELETE"],
-        credentials: true
-    }
-));
+app.use(cors({
+    origin: 'https://curd-mern-app-frontend.vercel.app',
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 app.use(express.json());  
 

@@ -12,6 +12,7 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   const [popUp, setPopUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userIdToDelete, setUserIdToDelete] = useState(null);
 
   useEffect(() => {
     setIsLoading(true)
@@ -24,10 +25,18 @@ const Home = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleDelete = (id) => {
+  const activePopUp = (id) => {
+    setUserIdToDelete(id);
+    !setPopUp(); 
+    if (!popUp) {
+      document.querySelector(".wrapper").classList.add("active");
+    }
+  };
+
+  const handleDelete = () => {
     setIsLoading(true);
     axios
-      .delete(`${baseURL}/delete/${id}`)
+      .delete(`${baseURL}/delete/${userIdToDelete}`)
       .then((result) => {
         console.log(result);
         setIsLoading(false)
@@ -35,12 +44,7 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   };
-  const activePopUp = () => {
-    !setPopUp(); 
-    if (!popUp) {
-      document.querySelector(".wrapper").classList.add("active");
-    }
-  };
+
   const removePopUp = () => {
     document.querySelector(".wrapper").classList.remove("active");
   };
@@ -59,7 +63,7 @@ const Home = () => {
             <th>Action</th>
           </thead>
           <br />
-          <tbody className={isLoading? "animate": "remove-anim"}>
+          <tbody>
             {isLoading ? (
               <tr style={{display: "flex", padding:"25px 0"}}>
                 <td
@@ -87,15 +91,15 @@ const Home = () => {
                     >
                       <RxUpdate />
                     </Link>
-                    <button id="danger" title="Delete" onClick={activePopUp} >
+                    <button id="danger" title="Delete" onClick={activePopUp(user._id)} >
                       <MdDelete />
                     </button>
                     <div className="wrapper">
                       <div className="open-danger-area">
                         <p>Want to delete your data completely?</p>
                         <div className="btns">
-                          <button onClick={() => handleDelete(user._id)}>
-                            {isLoading? 'Deleting...':'Yes, Delete'}
+                          <button onClick={() => handleDelete()}>
+                            {isLoading? <><Animation/> Deleting...</>:'Yes, Delete'}
                           </button>
                           <button onClick={removePopUp}>Cancel</button>
                         </div>

@@ -4,7 +4,7 @@ This is a simple CRUD (Create, Read, Update, Delete) application built using Mon
 
 ## Live Preview
 
-You can check out the live version of the app [here](https://curd-mern-app-frontend.vercel.app/) (replace with your actual live preview link).
+You can check out the live version of the app [here](https://curd-mern-app-frontend.vercel.app/).
 
 ## Getting Started
 
@@ -20,7 +20,7 @@ To get started read the instructions below carefully.
 
 1. Clone the repo
 ```bash
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/saqibbedar/CURD-MERN-App.git
 ```
 
 ### Install NPM packages
